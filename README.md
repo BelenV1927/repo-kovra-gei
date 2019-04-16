@@ -1,7 +1,7 @@
 # LPOO-2019
 Laboratorio de Programación Orientada a Objetos
 
-## Nombre del grupo
+##  Kovra gei
 
-+ Integrante uno
++ Henri Penicaud
 + Integrante dos
