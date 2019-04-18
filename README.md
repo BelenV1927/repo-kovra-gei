@@ -4,4 +4,4 @@ Laboratorio de Programación Orientada a Objetos
 ##  Kovra gei
 
 + Henri Penicaud
-+ Integrante dos
++ Bruno Romero
