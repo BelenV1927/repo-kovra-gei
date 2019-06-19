@@ -1,0 +1,83 @@
+import wollokREPL.*
+
+test "Movimineto de bondi y suba de pasajeros" {
+
+	bondi.sig_parada()
+	bondi.sig_parada()
+	bondi.subir_pasj()
+	assert.equals(bondi.nafta(),480)
+	assert.equals(7,bondi.cant_pasj())
+	
+	}
+	
+test "Cambio de direccion" {
+	bondi.sig_parada()
+	bondi.sig_parada()
+	bondi.sig_parada()
+	bondi.sig_parada()
+	bondi.sig_parada()
+	bondi.sig_parada()
+	
+	assert.equals(4,bondi.parada_actual())
+	
+}
+
+test "Calculo de ganancia correcto" {
+	bondi.sig_parada()
+	bondi.sig_parada()
+	bondi.sig_parada()
+	bondi.subir_pasj()
+	assert.equals(12,bondi.cant_pasj())
+	assert.equals(240,bondi.ganancia())
+}
+
+test "Cantidad de pasajeros extra" {
+	bondi.sig_parada()
+	bondi.subir_pasj()
+	bondi.sig_parada()
+	bondi.subir_pasj()
+	bondi.sig_parada()
+	bondi.subir_pasj()
+	bondi.sig_parada()
+	bondi.subir_pasj()
+	assert.equals(4,bondi.parada_actual())
+	assert.equals(50,bondi.cant_pasj())
+	assert.equals(1,bondi.extras_durante_recorrido())
+}
+
+test "Bajar pasajeros cuando no hay ninguno" {
+	bondi.sig_parada()
+	bondi.bajar_pasj()
+	assert.equals(1,bondi.parada_actual())
+	assert.equals(0,bondi.cant_pasj())
+}
+
+test "Baja de combustible sin pasajeros" {
+	bondi.sig_parada()
+	bondi.sig_parada()
+	bondi.sig_parada()
+	assert.equals(470,bondi.nafta())
+}
+
+test "Baja de combustible con pasajeros" {
+	bondi.sig_parada()
+	bondi.subir_pasj()
+	bondi.sig_parada()
+	assert.equals(477,bondi.nafta())
+}
+
+test "Precio de la ultima parada" {
+	bondi.sig_parada()
+	bondi.sig_parada()
+	bondi.sig_parada()
+	bondi.sig_parada()
+	bondi.subir_pasj()
+	assert.equals(85,bondi.ganancia())
+}
+
+test "Cargar combustible en parada incorrecta" {
+	bondi.sig_parada()
+	bondi.cargarcombs(50)
+	assert.equals(490,bondi.nafta())
+}
+
