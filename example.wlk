@@ -8,7 +8,7 @@ object poligono{
 			return ((a==b) and (a==c))
 		}
 		else {
-			return "No es un triangulo"
+			return false
 		}
 	}
 	method esIsosceles(){
@@ -16,7 +16,7 @@ object poligono{
 			return ((a==b) and (a!==c)) or ((a!==b) and (a==c)) or ((b==c) and (b!==a))
 		}
 		else {
-			return "No es un triangulo"
+			return false
 		}
 	}
 	method esEscaleno(){
@@ -24,7 +24,7 @@ object poligono{
 			return ((a!==b) and (a!==c) and (b!==c))
 		}
 		else {
-			return "No es un triangulo"
+			return false
 		}
 	}
 	method verificacion_triangulo(){
