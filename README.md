@@ -5,3 +5,4 @@ Laboratorio de Programación Orientada a Objetos
 
 + Henri Penicaud
 + Bruno Romero
++ Belén Veira
