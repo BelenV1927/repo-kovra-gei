@@ -128,7 +128,7 @@ object bondi {
 						cant_pasj=cantpasjmax
 						extra_parada_3B=cantpasjmax - aux
 						extra_parada_3B=paradas.pasj3subenB() - extra_parada_3B
-						return "Proceso terminado"
+						return "Proceso terminadok"
 						}
 					ganancia=ganancia + paradas.pasj3subenB() * precio
 					return "Combustible restante" + combustible + "Ganancia haste el momento" + ganancia + "Pasajeros en BONDI" + cant_pasj
