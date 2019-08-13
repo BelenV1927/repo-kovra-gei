@@ -1,0 +1,29 @@
+ Ajedrez TP:                                                         CONSIGNAS
+
+- Poder configurar el tablero (8x8).
+- Ver como represenmtar clases en UML.
+
+A) Metodo que permita saber si las fichas del tablero son todas la correctas, y no de mas. (Si no o es asi, se descarta). Posicion valida (blanco y negro). Casos de pruebas.
+
+B) Saber quien esta en ventaja material.
+
+C) Evaluar valides de movimiento.
+
+D) Que ventaja material otorga o aporta la movida.
+
+Entregarle el diagrama, el codigo y los tests.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+Ideas: 
+- Crear los objetos a partir de la clase de ficha que son (ej peones,torres...)
+
+- Un objeto "tablero" que tenga el metodo "verificacion_de_fichas" o algo por el estilo, para saber si no hay fichas de mas en el tablero o si faltan
+ 
+- Que el objeto tablero tenga otro metodo llamada "verificacion_material" que con lambdas calculen cuantos puntos tienen los blancos y las negras.
+
+- Luego de cada movida se vuelve a hacer la "verificacion_material"
+
+- Los objetos fichas tienen como variables su posicion,su valor,la posicion a la cual se quiere mover.Los metodos son mover y devolver posicion
+
+- El objeto tablero tiene de atributos cada posicion del tablero y como metodos "verificacion_material", "verificacion_de_fichas","casillas ocupadas"
+ 
