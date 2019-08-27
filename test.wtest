@@ -1,88 +1,28 @@
 import example.*
- test "Verificacion triangulo" {
- 	poligono.a(10)
- 	poligono.b(10)
- 	poligono.c(10)
- 	assert.equals(poligono.verificacion_triangulo(),true)
- }
+
+  test "Comprobacion hay mas objetos de lo debido" {
  
- test "vericacion de no ser un triangulo" {
- 	poligono.a(30)
- 	poligono.b(10)
- 	poligono.c(10)
- 	assert.equals(poligono.verificacion_triangulo(),false)
- }
-test "Que un triangulo equilatero ES un equilatero"{
- 	poligono.a(10)
- 	poligono.b(10)
- 	poligono.c(10)
- 	assert.equals(poligono.esEquilatero(),true)	
-}
-test "Que un triangulo equilatero NO ES un escaleno"{
- 	poligono.a(10)
- 	poligono.b(10)
- 	poligono.c(10)
- 	assert.equals(poligono.esEscaleno(),false)	
-}
-test "Que un triangulo equilatero NO ES un isosceles"{
- 	poligono.a(10)
- 	poligono.b(10)
- 	poligono.c(10)
- 	assert.equals(poligono.esIsosceles(),false)	
-}
+const peonb1 = new Peones()
+const peonb2 = new Peones()
+const peonb3 = new Peones()
+const peonb4 = new Peones()
+const peonb5 = new Peones()
+const peonb6 = new Peones()
+const peonb7 = new Peones()
+const peonb8 = new Peones() 	
+const peonb9 = new Peones()
 
-test "Que un triangulo isosceles ES un isosceles"{
- 	poligono.a(15)
- 	poligono.b(10)
- 	poligono.c(10)
- 	assert.equals(poligono.esIsosceles(),true)	
-}
-test "Que un triangulo isosceles NO ES un escaleno"{
- 	poligono.a(15)
- 	poligono.b(10)
- 	poligono.c(10)
- 	assert.equals(poligono.esEscaleno(),false)	
-}
-test "Que un triangulo isosceles NO ES un equilatero"{
- 	poligono.a(15)
- 	poligono.b(10)
- 	poligono.c(10)
- 	assert.equals(poligono.esEquilatero(),false)	
-}
-test "Que un triangulo escaleno ES un escaleno"{
- 	poligono.a(15)
- 	poligono.b(12)
- 	poligono.c(10)
- 	assert.equals(poligono.esEscaleno(),true)	
-}
-test "Que un triangulo escaleno NO ES un isosceles"{
- 	poligono.a(15)
- 	poligono.b(12)
- 	poligono.c(10)
- 	assert.equals(poligono.esIsosceles(),false)	
-}
-test "Que un triangulo escaleno NO ES un equilatero"{
- 	poligono.a(15)
- 	poligono.b(12)
- 	poligono.c(10)
- 	assert.equals(poligono.esEquilatero(),false)	
-}
+peonb1.agregar_a_coleccion_blanca() 
+peonb2.agregar_a_coleccion_blanca() 
+peonb3.agregar_a_coleccion_blanca() 
+peonb4.agregar_a_coleccion_blanca() 
+peonb5.agregar_a_coleccion_blanca() 
+peonb6.agregar_a_coleccion_blanca() 
+peonb7.agregar_a_coleccion_blanca() 
+peonb8.agregar_a_coleccion_blanca() 
+peonb9.agregar_a_coleccion_blanca() 
 
-test "que pasa si se ingresa un lado negativo"{
-	poligono.a(15)
-	poligono.b(12)
-	poligono.c(-10)
-	assert.equals(poligono.verificacion_triangulo(),false)
+assert.tablero.verificacion_cantidad_de_piezas()
 }
-test "que pasa si ingreso dos lados negativos iguales" {
-	poligono.a(15)
-	poligono.b(-12)
-	poligono.c(-12)
-	assert.equals(poligono.verificacion_triangulo(),false)
-}
-test "que pasa si ingreso todos los lados negativos iguales"{
-	poligono.a(-15)
-	poligono.b(-15)
-	poligono.c(-15)
-	assert.equals(poligono.verificacion_triangulo(),false)
-}
+  
+  
