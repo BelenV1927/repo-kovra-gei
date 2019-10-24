@@ -35,7 +35,7 @@ object juego {
 		(1..3).forEach{self.dar_carta_a_maquina()}
 	}
 	method repartir_todo() {
-		self.repartir_a_jugadores()
+		self.repartir_carta_a_jugadores()
 		(1..4).forEach{self.repartir_cartas_a_mesa()}
 	}
 	method jugador_dejar_carta(nombre) {
@@ -48,7 +48,7 @@ object juego {
                aux= cartas_mano_maquina.find({ x => x.quiensoy() == nombre} )
                cartas_mano_maquina.remove(aux)
                cartas_mesa.add(aux)
-
+	}
    	method ver_cartas_jugador() {
 		return cartas_mano_jugador
 	}
@@ -83,6 +83,8 @@ object juego {
         method es_escoba() {
                 return cartas_mesa.count({x=>x.valor_carta()})
           }
+          
+          }
 
 class Cartas {
 	var valor
@@ -93,7 +95,7 @@ class Cartas {
 		valor= _valor
 	}
         method valor_carta(){
-         return= valor
+         return valor
          }
 
 	method quiensoy(){
@@ -122,4 +124,3 @@ class Cartas {
 		return (valor == 7) and (palo == "oro")
 	}
 }
-
