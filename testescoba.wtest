@@ -1,0 +1,20 @@
+import escobadel15.*
+
+test "verificacion de cartas del jugador"{
+  juego.repartir_carta_a_jugadores()
+  asset.equals(3, juego.cantidad_actual_jugador()
+}
+
+test "verificacion de cartas de la maquina"{
+  juego.repartir_carta_a_jugadores()
+  asset.equals(3, juego.cantidad_actual_maquina()
+}
+
+test "verificar que el jugador tenga turno"{
+  assert.equals(1, juego.turno_actual()
+}
+
+test "verificar que la maquina tenga turno"{
+  juego.cambiar_turno()
+  assert.equals(-1, juego.turno_actual()
+}
