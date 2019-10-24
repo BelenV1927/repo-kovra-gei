@@ -22,6 +22,8 @@ object juego {
 		aux=cartas_mazo.anyOne()
 		cartas_mazo.remove(aux)
 		cartas_mano_jugador.add(aux)
+                Self.cambiar_turno()
+
 	}
 	method repartir_cartas_a_maquina() {
 		aux=cartas_mazo.anyOne()
@@ -60,7 +62,9 @@ object juego {
 	method siete_de_velo () {
 		return monto_jugador.find({x => x.soy_siete_de_velo()}) == 1
 	}
-}
+        method es_escoba() {
+                return cartas_mesa.count({x=>x.valor_carta()})
+          }
 
 class Cartas {
 	var valor
@@ -70,6 +74,10 @@ class Cartas {
 		palo= _palo
 		valor= _valor
 	}
+        method valor_carta(){
+         return= valor
+         }
+
 	method quiensoy(){
 		if (valor <= 7 ) {
 		return valor + "de" + palo
@@ -96,3 +104,4 @@ class Cartas {
 		return (valor == 7) and (palo == "oro")
 	}
 }
+
