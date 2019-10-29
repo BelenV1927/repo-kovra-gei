@@ -1,8 +1,8 @@
 object juego {
-	var  cartas_mesa=[]
+	var cartas_mesa=[]
 	var cartas_mano_jugador=[]
 	var cartas_mano_maquina=[]
-	var  cartas_mazo=[]
+	var cartas_mazo=[]
 	var cartas_elegidas=[]
 	var monto_jugador=[]
 	var monto_maquina=[]
@@ -32,7 +32,6 @@ object juego {
 		cartas_mazo.remove(aux)
 		cartas_mano_jugador.add(aux)
                
-
 	}
 	method dar_carta_a_maquina() {
 		aux=cartas_mazo.anyOne()
@@ -40,12 +39,12 @@ object juego {
 		cartas_mano_maquina.add(aux)
 	}
 	method repartir_carta_a_jugadores () {
-		(1..3).forEach{self.dar_carta_a_jugador()}
-		(1..3).forEach{self.dar_carta_a_maquina()}
+		(1..3).forEach{n => self.dar_carta_a_jugador()}
+		(1..3).forEach{n => self.dar_carta_a_maquina()}
 	}
 	method repartir_todo() {
 		self.repartir_carta_a_jugadores()
-		(1..4).forEach{self.repartir_cartas_a_mesa()}
+		(1..4).forEach{n => self.repartir_cartas_a_mesa()}
 	}
 	method jugador_dejar_carta(nombre) {
 		aux = cartas_mano_jugador.find({ x => x.quiensoy() == nombre} )
@@ -130,7 +129,6 @@ object juego {
 class Cartas {
 	var valor
 	var palo
-	var nombre
 	constructor (_palo,_valor) {
 		palo= _palo
 		valor= _valor
