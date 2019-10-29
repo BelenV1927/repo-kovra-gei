@@ -1,4 +1,4 @@
-import escobadel15.*
+import example.*
 
 test "verificacion de cartas del jugador"{
   juego.repartir_carta_a_jugadores()
