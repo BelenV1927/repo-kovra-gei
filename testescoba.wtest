@@ -3,22 +3,22 @@ import example.*
 test "verificacion de cartas del jugador"{
   juego.crear_mazo()
   juego.repartir_carta_a_jugadores()
-  asset.equals(3, juego.cantidad_actual_jugador()
+  assert.equals(3, juego.cantidad_actual_jugador())
 }
 
 test "verificacion de cartas de la maquina"{
   juego.crear_mazo()
   juego.repartir_carta_a_jugadores()
-  asset.equals(3, juego.cantidad_actual_maquina()
+  assert.equals(3, juego.cantidad_actual_maquina())
 }
 
 test "verificar que el jugador tenga turno"{
-  assert.equals(1, juego.turno_actual()
+  assert.equals(1, juego.turno_actual())
 }
 
 test "verificar que la maquina tenga turno"{
-  juego.cambiar_turno()
-  assert.equals(-1, juego.turno_actual()
+	juego.cambiar_turno()
+  assert.equals(-1, juego.turno_actual())
 }
 
 test "verificar cantidad de cartas correcta"
