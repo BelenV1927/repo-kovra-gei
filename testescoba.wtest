@@ -1,11 +1,13 @@
 import example.*
 
 test "verificacion de cartas del jugador"{
+  juego.crear_mazo()
   juego.repartir_carta_a_jugadores()
   asset.equals(3, juego.cantidad_actual_jugador()
 }
 
 test "verificacion de cartas de la maquina"{
+  juego.crear_mazo()
   juego.repartir_carta_a_jugadores()
   asset.equals(3, juego.cantidad_actual_maquina()
 }
