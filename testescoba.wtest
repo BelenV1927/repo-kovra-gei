@@ -24,3 +24,9 @@ test "verificar cantidad de cartas correcta"
 juego.crear_mazo()
 assert.equals(40,juego.ver_cantidad_cartas_mazo())
 } 
+
+test "verificar cartas en la mesa" {
+	juego.crear_mazo()
+	juego.repartir_todo()
+	assert.equals(4,juego.ver_cantidad_cartas_mesa())
+}
