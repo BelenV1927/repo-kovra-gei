@@ -18,3 +18,9 @@ test "verificar que la maquina tenga turno"{
   juego.cambiar_turno()
   assert.equals(-1, juego.turno_actual()
 }
+
+test "verificar cantidad de cartas correcta"
+{
+juego.crear_mazo()
+assert.equals(40,juego.ver_cantidad_cartas_mazo())
+} 
