@@ -86,7 +86,7 @@ object juego {
         }
 
 	method cambiar_turno(){
-		turno * -1
+		turno = turno * -1
 	}
 	method  cantidad() {
 		return monto_jugador.size() >= 20
