@@ -1,10 +1,8 @@
-import wollok.lang
-
 object juego {
-	var cartas_mesa=[]
+	var  cartas_mesa=[]
 	var cartas_mano_jugador=[]
 	var cartas_mano_maquina=[]
-	var cartas_mazo=[]
+	var  cartas_mazo=[]
 	var cartas_elegidas=[]
 	var monto_jugador=[]
 	var monto_maquina=[]
@@ -18,6 +16,12 @@ object juego {
 		(1..10).forEach({n => cartas_mazo.add(new Cartas("basto",n))})
 		(1..10).forEach({n => cartas_mazo.add(new Cartas("copa",n))})
 	}
+	method ver_cantidad_cartas_mazo() {
+		return cartas_mazo.size()
+		}
+		method ver_cantidad_cartas_mesa() {
+			return cartas_mesa.size()
+			}
 	method repartir_cartas_a_mesa() {
 		aux= cartas_mazo.anyOne()
 		cartas_mazo.remove(aux)
@@ -47,12 +51,14 @@ object juego {
 		aux = cartas_mano_jugador.find({ x => x.quiensoy() == nombre} )
 		cartas_mano_jugador.remove(aux)
 		cartas_mesa.add(aux)
+		self.cambiar_turno()
 		
 	}
         method maquina_dejar_carta(nombre){
                aux= cartas_mano_maquina.find({ x => x.quiensoy() == nombre} )
                cartas_mano_maquina.remove(aux)
                cartas_mesa.add(aux)
+               self.cambiar_turno()
 	}
 	
 	method comparar_cartas(carta_tirada, cartas_seleccionadas){
@@ -97,12 +103,12 @@ object juego {
    
 	method setenta_jugador() {
 		var sietes = monto_jugador.filter{x => x.soy_siete()}
-		if(sietes.any({x => x.palo() == "oro"}) and sietes.any({x => x.palo() == "espada"}) and sietes.any({x => x.palo() == "basto"}) and sietes.any({x => x.palo() == "as"}))
+		if(sietes.any({x => x.palo() == "oro"}) and sietes.any({x => x.palo() == "espada"}) and sietes.any({x => x.palo() == "basto"}) and sietes.any({x => x.palo() == "copa"}))
 			puntaje_jugador++;
 	}
 	method setenta_maquina() {
 		var sietes = monto_maquina.filter{x => x.soy_siete()}
-		if(sietes.any({x => x.palo() == "oro"}) and sietes.any({x => x.palo() == "espada"}) and sietes.any({x => x.palo() == "basto"}) and sietes.any({x => x.palo() == "as"}))
+		if(sietes.any({x => x.palo() == "oro"}) and sietes.any({x => x.palo() == "espada"}) and sietes.any({x => x.palo() == "basto"}) and sietes.any({x => x.palo() == "copa"}))
 			puntaje_maquina++;
 	}
 	method siete_de_velo_jugador(){
