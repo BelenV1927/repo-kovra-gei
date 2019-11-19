@@ -201,8 +201,7 @@ object mazo{
 
 object juego{
 	var cartas_mesa = []
-	var jugadores = []
-	var turno=1
+
 
 
     
