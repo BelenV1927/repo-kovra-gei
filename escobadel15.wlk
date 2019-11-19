@@ -13,11 +13,11 @@ class Carta{
     
 	method quiensoy(){
 		var nombre = valor // aca la variable nombre se iguala al valor de la carta
-		if(valor == 10)
+		if(valor == 8)
 			nombre = "Sota" // aca la variable nombre cambia a Sota y lo mismo con los siguientes
-	    if(valor == 11)
+	    if(valor == 9)
 	    	nombre = "Caballo"
-	    if(valor == 12)
+	    if(valor == 10)
 	    	nombre = "Rey"
 		if(valor == 1)
 		    nombre = "As"
@@ -59,8 +59,13 @@ object jugador{
 		cartasEnMano.add(carta)
 	}
 	//metodo que devuelve una carta de su mano mediante su posicion
-	method sacar_carta(posicion){
+	method elegir_carta(posicion){
 		return cartasEnMano.get(posicion)
+	}
+	method dejar_carta_en_mesa(posicion){
+		var una_carta = self.elegir_carta(posicion)
+		cartasEnMano.remove(una_carta)
+		juego.recibir_carta_en_mesa(una_carta)
 	}
 	//muestra las cartas de la mano (devuelve la coleccion cartasEnMano) 
 	method mostrar_cartas(){
@@ -131,8 +136,13 @@ object maquina{
 		cartasEnMano.add(carta)
 	}
 	
-	method sacar_carta(posicion){
+	method elegir_carta(posicion){
 		return cartasEnMano.get(posicion)
+	}
+	method dejar_carta_en_mesa(posicion){
+		var una_carta = self.elegir_carta(posicion)
+		cartasEnMano.remove(una_carta)
+		juego.recibir_carta_en_mesa(una_carta)
 	}
 	
 	method mostrar_cartas(){
@@ -201,10 +211,6 @@ object mazo{
 
 object juego{
 	var cartas_mesa = []
-
-
-
-    
 	method repartir_cartas(){
     		// el jugador recibe 3 cartas al azar provenientes del mazo
     		(1..3).forEach({ x => jugador.recibir_carta( mazo.pedir_carta() ) }) 
@@ -220,5 +226,11 @@ object juego{
 	
 	method mostrar_cartas_mesa(){
    		return cartas_mesa
+   	}
+   	method recibir_carta_en_mesa(carta){
+   		cartas_mesa.add(carta)
+   	}
+   	method verificacion_jugada_da_quince(coleccion_de_jugada){
+   		return(coleccion_de_jugada.sum() == 15)
    	}
 }
