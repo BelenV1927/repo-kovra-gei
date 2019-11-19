@@ -1,3 +1,4 @@
+//creamos la clase carta donde estan las distintas cartas con sus respectivos palos y valores
 class Carta{
 	var valor
 	var palo
@@ -5,76 +6,108 @@ class Carta{
 		palo= _palo
 		valor= _valor
 	}
+	//metodo que muestra el valor de la carta
     method valor_carta(){
          return valor
     }
     
 	method quiensoy(){
-		var nombre = valor
+		var nombre = valor // aca la variable nombre se iguala al valor de la carta
 		if(valor == 10)
-			nombre = "Sota"
+			nombre = "Sota" // aca la variable nombre cambia a Sota y lo mismo con los siguientes
 	    if(valor == 11)
 	    	nombre = "Caballo"
 	    if(valor == 12)
 	    	nombre = "Rey"
 		if(valor == 1)
 		    nombre = "As"
-		return "" + nombre + " de " + palo
+		return "" + nombre + " de " + palo //aca se concadena el nombre y "de palo" 
 	}
 	
+	// aca se muestra el palo 
 	method palo(){
 	 	 return palo
 	}	
-	
+	//devuelve true o false si el valor de la carta es 7 
 	method soy_siete(){
 		return (valor == 7)
-	}
+	}//devuelve true o false si el valor de la carta es 7 y de palo Oro
 	method soy_siete_de_velo() {
 		return (valor == 7 and palo == "Oro")
-	}
+	}//devuelve true o false si el palo de la carta es Oro 
 	method soy_oro(){
-		return palo == "Oro"
+		return (palo == "Oro")
+	}
 }
 
 object jugador{
 	var cartasEnMano = []
 	var monto = []
 	var mano = true
+	var puntaje = 0
 	
+	//metodo donde invierte el turno del jugador 
 	method cambiar_turno(){
 		mano = not mano 
 	}
-	
+	//metodo donde devuelve la cantidad total de cartas del mazo
 	method cantidad_cartas(){
 		return cartasEnMano.size()
 	}
-	
+	//metodo que permite recibir cartas del mazo y agregarlas a su mano
 	method recibir_carta(carta) {
 		cartasEnMano.add(carta)
 	}
-	
+	//metodo que devuelve una carta de su mano mediante su posicion
 	method sacar_carta(posicion){
 		return cartasEnMano.get(posicion)
 	}
-	
+	//muestra las cartas de la mano (devuelve la coleccion cartasEnMano) 
 	method mostrar_cartas(){
 		return cartasEnMano
 	}
 	
 	method jugada(cartasElegidas, carta){
 		var cartasTotales = cartasElegidas.add(carta)
+		
 	}
+	
+	//devuelve la cantidad de cartas que el jugador agarro en la partida
 	method cantidad_en_monto() {
 		return monto.size()
 	}
+	
+	method contar_puntaje(){
+		// este metodo compara la cantidad de 7ts que tiene la maquina con el jugador
+		// si ambos tiene 2 cartas 7ts el punto se anula
+		if(maquina.cuantos_sietes_tengo() != 2 and self.cuantos_sietes_tengo() != 2){
+			//el puntaje del jugador se le suma la cantidad de cartas que este tiene 
+			puntaje += self.cuantos_sietes_tengo()
+		}
+		//si el jugador tiene un 7 de velo se le sumara un punto
+		if(self.tengo_siete_de_velo()){
+			puntaje += 1
+		}
+		//si el jugador tiene mas carta de palo oro que la maquina se le suma un punto
+		//si tienen la misma cantidad de cartas oro no se le suma el punto al jugador
+		if(self.cuantos_oros_tengo() > maquina.cuantos_oros_tengo()){
+			puntaje += 1
+		}
+		// si el jugador tiene mas cartas que la maquina entonces se le suma un punto 
+		if(self.cantidad_cartas() > maquina.cantidad_cartas()){
+			puntaje += 1 
+		}
+	}
+	
+	//devuelve un true o false si el jugador tiene el 7 de velo
 	method tengo_siete_de_velo(){
 		return monto.any({ x => x.soy_siete_de_velo()})
-	}
+	}// devuelve la cantidad de 7ts que tiene 
 	method cuantos_sietes_tengo(){
-		return monto.filter({ x => x.soy_siete()})
-	}
+		return monto.count({ x => x.soy_siete()})
+	}//devuelve la cantidad de cartas que tiene el palo Oro
 	method cuantos_oros_tengo(){
-		return monto.filter({ x => x.soy_oro()})
+		return monto.count({ x => x.soy_oro()})
 	}
 	
 }
@@ -83,7 +116,7 @@ object maquina{
 	var cartasEnMano = []
 	var monto = []
 	var mano = false
-	
+	var puntaje = 0
 	method cambiar_turno(){
 		mano = not mano 
 	}
@@ -107,6 +140,38 @@ object maquina{
 		return monto.size()
 	}
 	
+	method contar_puntaje(){
+		// este metodo compara la cantidad de 7ts que tiene la maquina con el jugador
+		// si ambos tiene 2 cartas 7ts el punto se anula
+		if(jugador.cuantos_sietes_tengo() != 2 and self.cuantos_sietes_tengo() != 2){
+			//el puntaje de la maquina se le suma la cantidad de cartas que este tiene 
+			puntaje += self.cuantos_sietes_tengo()
+		}
+		//si la maquina tiene un 7 de velo se le sumara un punto
+		if(self.tengo_siete_de_velo()){
+			puntaje += 1
+		} 
+		//si la maquina tiene mas carta de palo oro que el jugador se le suma un punto
+		//si tienen la misma cantidad de cartas oro no se le suma el punto a la maquina
+		if(self.cuantos_oros_tengo() > jugador.cuantos_oros_tengo()){
+			puntaje += 1
+		}
+		// si la maquina tiene mas cartas que el jugador entonces se le suma un punto 
+		if(self.cantidad_cartas() > jugador.cantidad_cartas()){
+			puntaje += 1 
+		}
+	}
+	
+	//devuelve un true o false si la maquina tiene el 7 de velo
+	method tengo_siete_de_velo(){
+		return monto.any({ x => x.soy_siete_de_velo()})
+	}// devuelve la cantidad de 7ts que tiene 
+	method cuantos_sietes_tengo(){
+		return monto.count({ x => x.soy_siete()})
+	}//devuelve la cantidad de cartas que tiene el palo Oro
+	method cuantos_oros_tengo(){
+		return monto.count({ x => x.soy_oro()})
+	}
 }
 
 object mazo{
@@ -134,9 +199,8 @@ object juego{
 	var cartas_mesa = []
 	var jugadores = []
 	var turno=1
-	var carta=0 
-	var puntos_jugador=0
-	var puntos_maquina=0
+
+
     
 	method repartir_cartas(){
     		// el jugador recibe 3 cartas al azar provenientes del mazo
@@ -154,42 +218,4 @@ object juego{
 	method mostrar_cartas_mesa(){
    		return cartas_mesa
    	}
-	method puntos_siete_de_velo(){
-		if (jugador.tengo_siete_de_velo()){
-			puntos_jugador= puntos_jugador + 1
-		}
-		else {
-			puntos_maquina= puntos_maquina + 1
-		}
-	}
-	method puntos_setenta(){
-		if (jugador.cuantos_sietes_tengo() > 2){
-			puntos_jugador=puntos_jugador+1
-		}
-		else {
-			if (jugador.cuantos_sietes_tengo() < 2)
-				puntos_maquina=puntos_maquina+1
-			}
-		}
-	}
-	method puntos_cartas(){
-		if(jugador.cantidad_en_monto()>20){
-			puntos_jugador=puntos_jugador + 1
-			}
-		else {
-			if(jugador.cantidad_en_monto()<20){
-				puntos_maquina=puntos_maquina+1
-			}
-		}
-	}
-	method puntos_oros(){
-		if(jugador.cuantos_oros_tengo()>5){
-			puntos_jugador=puntos_jugador + 1
-		}
-		else{
-			if (jugador.cuantos_oros_tengo()<5){
-				puntos_maquina=puntos_mquina+1
-			}
-		}
-	}
 }
