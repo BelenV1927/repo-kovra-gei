@@ -233,4 +233,7 @@ object juego{
    	method verificacion_jugada_da_quince(coleccion_de_jugada){
    		return(coleccion_de_jugada.sum() == 15)
    	}
+	method verificacion_de_escoba(){
+   		return cartas_mesa.size() == 0
+   	}
 }
