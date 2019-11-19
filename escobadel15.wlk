@@ -82,7 +82,9 @@ object jugador{
 		// si ambos tiene 2 cartas 7ts el punto se anula
 		if(maquina.cuantos_sietes_tengo() != 2 and self.cuantos_sietes_tengo() != 2){
 			//el puntaje del jugador se le suma la cantidad de cartas que este tiene 
-			puntaje += self.cuantos_sietes_tengo()
+			if(maquina.cuantos_sietes_tengo()<self.cuantos_sietes_tengo()){
+			puntaje += 1
+			}
 		}
 		//si el jugador tiene un 7 de velo se le sumara un punto
 		if(self.tengo_siete_de_velo()){
@@ -145,7 +147,9 @@ object maquina{
 		// si ambos tiene 2 cartas 7ts el punto se anula
 		if(jugador.cuantos_sietes_tengo() != 2 and self.cuantos_sietes_tengo() != 2){
 			//el puntaje de la maquina se le suma la cantidad de cartas que este tiene 
-			puntaje += self.cuantos_sietes_tengo()
+			if (self.cuantos_sietes_tengo()>jugador.cuantos_sietes_tengo()){
+			puntaje += 1
+			}
 		}
 		//si la maquina tiene un 7 de velo se le sumara un punto
 		if(self.tengo_siete_de_velo()){
