@@ -1,4 +1,5 @@
 //creamos la clase carta donde estan las distintas cartas con sus respectivos palos y valores
+import wollok.lang
 class Carta{
 	var valor
 	var palo
@@ -51,31 +52,53 @@ object jugador{
 		mano = not mano 
 	}
 	//metodo donde devuelve la cantidad total de cartas del mazo
-	method cantidad_cartas(){
+	method cantidad_cartas(){ 
 		return cartasEnMano.size()
 	}
 	//metodo que permite recibir cartas del mazo y agregarlas a su mano
-	method recibir_carta(carta) {
+	method recibir_carta(carta) { 
 		cartasEnMano.add(carta)
 	}
 	//metodo que devuelve una carta de su mano mediante su posicion
-	method elegir_carta(posicion){
-		return cartasEnMano.get(posicion)
+	method sacar_carta_mano(posicion){ 
+		return cartasEnMano.get(posicion) 
 	}
-	method dejar_carta_en_mesa(posicion){
-		var una_carta = self.elegir_carta(posicion)
-		cartasEnMano.remove(una_carta)
-		juego.recibir_carta_en_mesa(una_carta)
-	}
+	method dejar_carta_en_mesa(posicion){    
+		var una_carta = self.sacar_carta_mano(posicion) 
+ 		cartasEnMano.remove(una_carta) 
+		juego.recibir_carta_en_mesa(una_carta) 
+	} 
 	//muestra las cartas de la mano (devuelve la coleccion cartasEnMano) 
-	method mostrar_cartas(){
+	method mostrar_cartas(){ 
 		return cartasEnMano
 	}
 	
-	method jugada(cartasElegidas, carta){
-		var cartasTotales = cartasElegidas.add(carta)
+	
+	method jugada(posicion_de_cartas_elegidas, posicion_carta_tirada){
 		
-	}
+		// se convierte las posiciones en objetos carta y se guarda en la variable cartas_reales 
+        var cartas_reales = posicion_de_cartas_elegidas.map({ x => juego.sacar_carta_mesa(x) }) 
+        
+        //convierte la posicion de la carta a tirar a la carta real y lo guarda en carta_tirada
+        var carta_tirada = self.sacar_carta_mano(posicion_carta_tirada) 
+        
+		// cartas_totales almacena las cartas reales y la carta tirada 
+        var cartas_totales = cartas_reales.add(carta_tirada) 
+
+        //llamamos al metodo jugada da quince del objeto juego y le ponemos de parametro las cartas totales
+    	if( juego.jugada_da_quince(cartas_totales) ){ 
+    		cartasEnMano.remove(carta_tirada) 
+    		monto.add(cartas_totales) 
+    		// si la mesa queda con 0 elementos 
+    		if(juego.verificacion_de_escoba()){
+    			puntaje += 1   
+    		}
+    	}else{
+    		juego.recibir_carta_en_mesa(carta_tirada)
+    		//si la jugada no da 15 llamamos al metodo recibir carta en mesa del objeto juego
+    		//y le ponemos como parametro la carta que tiramos 
+    	}
+	} 
 	
 	//devuelve la cantidad de cartas que el jugador agarro en la partida
 	method cantidad_en_monto() {
@@ -127,7 +150,7 @@ object maquina{
 	method cambiar_turno(){
 		mano = not mano 
 	}
-	
+	  
 	method cantidad_cartas(){
 		return cartasEnMano.size()
 	}
@@ -221,19 +244,22 @@ object juego{
    	}
  
 	method sacar_carta_mesa(posicion){
-		return cartas_mesa.get(posicion)
+		return cartas_mesa.get(posicion) 
    	}
+   	
 	
 	method mostrar_cartas_mesa(){
    		return cartas_mesa
    	}
-   	method recibir_carta_en_mesa(carta){
+   	method recibir_carta_en_mesa(carta){ 
    		cartas_mesa.add(carta)
    	}
-   	method verificacion_jugada_da_quince(coleccion_de_jugada){
-   		return(coleccion_de_jugada.sum() == 15)
-   	}
-	method verificacion_de_escoba(){
-   		return cartas_mesa.size() == 0
+   	  	
+   	method jugada_da_quince(coleccion){
+   		return (coleccion.count({ x => x.valor_carta() }) == 15)
+   	}  
+   	
+	method verificacion_de_escoba(){  
+   		return (cartas_mesa.size() == 0)
    	}
 }
